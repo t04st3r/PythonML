@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from estimators.est import Perceptron, AdalineGD, AdalineSGD
-from helpers.helper import PlotBoundaries
+from helpers.helper import PlotBoundaries, PlotCost
 import os
 
 file = 'iris.data'
@@ -47,9 +47,8 @@ X_std[:, 1] = (X[:, 1] - X[:, 1].mean()) / X[:, 1].std()
 # plot misclassifications through epocs graph
 # ppn = Perceptron(eta=0.1, n_iter=10)
 # ppn.fit(X, y)
-# plt.plot(range(1, len(ppn.errors_) + 1), ppn.errors_, marker='o')
-# plt.xlabel('Epochs')
-# plt.ylabel('# of Misclassifications')
+# plt_cost = PlotCost(ppn.errors_)
+# plt = plt_cost.plot()
 # plt.show()
 
 #plot decision boundaries
@@ -90,9 +89,8 @@ X_std[:, 1] = (X[:, 1] - X[:, 1].mean()) / X[:, 1].std()
 #plot SGD misclassifications through Epochs
 ada = AdalineSGD(n_iter=15, eta=0.01, random_state=1)
 ada.fit(X_std, y)
-plt.plot(range(1, len(ada.cost_) + 1), ada.cost_, marker='o')
-plt.xlabel('Epochs')
-plt.ylabel('Average Cost')
+plt_cost = PlotCost(ada.cost_)
+plt = plt_cost.plot()
 plt.show()
 
 #plot decision boundaries for SGD

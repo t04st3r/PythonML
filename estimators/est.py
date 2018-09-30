@@ -145,7 +145,7 @@ class AdalineSGD(object):
         self.cost_ = []
 
         for _ in range(self.n_iter):
-            if self.shuffle :
+            if self.shuffle:
                 X, y = self._shuffle(X, y)
             cost = []
             for xi, target in zip(X, y):

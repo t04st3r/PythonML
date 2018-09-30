@@ -33,3 +33,16 @@ class PlotBoundaries(object):
             plt.scatter(x=self.X[self.y == cl, 0], y=self.X[self.y == cl, 1],
                         alpha=0.8, c=cmap(idx), marker=markers[idx], label=cl)
         return plt
+
+
+class PlotCost(object):
+    """ Plot cost function through epochs"""
+
+    def __init__(self, cost):
+        self.cost = cost
+
+    def plot(self):
+        plt.plot(range(1, len(self.cost) + 1), self.cost, marker='o')
+        plt.xlabel('Epochs')
+        plt.ylabel('Cost')
+        return plt
