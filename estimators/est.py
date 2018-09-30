@@ -160,9 +160,9 @@ class AdalineSGD(object):
             self._initialize_weights(X.shape[1])
         if y.ravel().shape[0] > 1:
             for xi, target in zip(X, y):
-                self._update_weights(X, y)
+                self._update_weights(xi, target)
         else:
-            self._update_weights(xi, target)
+            self._update_weights(X, y)
         return self
 
     def _shuffle(self, X, y):
