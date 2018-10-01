@@ -6,11 +6,12 @@ import matplotlib.pyplot as plt
 class PlotBoundaries(object):
     """ Plot decision regions for a 2D dataset"""
 
-    def __init__(self, X, y, classifier, resolution=0.02):
+    def __init__(self, X, y, classifier, test_idx=None, resolution=0.02):
         self.X = X
         self.y = y
         self.classifier = classifier
         self.resolution = resolution
+        self.test_idx = test_idx
 
     def plot(self):
         markers = ('s', 'x', 'o', '^', 'v')
@@ -32,6 +33,10 @@ class PlotBoundaries(object):
         for idx, cl in enumerate(np.unique(self.y)):
             plt.scatter(x=self.X[self.y == cl, 0], y=self.X[self.y == cl, 1],
                         alpha=0.8, c=cmap(idx), marker=markers[idx], label=cl)
+        if self.test_idx:
+            X_test, y_test = self.X[self.test_idx, :], self.y[self.test_idx]
+            plt.scatter(X_test[:, 0], X_test[:, 1], facecolors='none', edgecolors='black', label='Test Set')
+
         return plt
 
 
