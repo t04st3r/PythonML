@@ -14,7 +14,11 @@ y = iris.target
 distances = sorted(sklearn.neighbors.VALID_METRICS['brute'])
 print(distances)
 
-knn = KNeighborsClassifier(n_neighbors=5, p=2, metric='minkowski')
+distance = 'euclidean'  # 'manhattan'
+
+p = 2 if distance == 'euclidean' else 1
+
+knn = KNeighborsClassifier(n_neighbors=5, p=p, metric='minkowski')
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
@@ -33,7 +37,7 @@ knn_bound = PlotBoundaries(X=X_combined_std, y=y_combined, classifier=knn, test_
 plt = knn_bound.plot()
 plt.xlabel('petal length [cm]')
 plt.ylabel('sepal length [cm]')
-plt.suptitle('minkowski', fontsize=20)
+plt.suptitle(distance, fontsize=20)
 plt.legend(loc='upper left')
 plt.show()
 
